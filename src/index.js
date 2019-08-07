@@ -4,13 +4,13 @@ import * as serviceWorker from './serviceWorker';
 import './index.less';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from './redux/reducer/index';
+import Reducer from './redux/reducer/index';
 import App from './App';
 import '@common/constants/config';
 import '@less/common/index.less';
 
 const store = createStore(
-  rootReducer,
+  Reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 ReactDOM.render(

@@ -1,7 +1,7 @@
-import customerApi from './customer';
 import manageApi from './manage';
+import userApi from './user';
 
 export default {
-  ...customerApi,
-  ...manageApi
+  ...manageApi,
+  ...userApi
 };

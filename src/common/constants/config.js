@@ -1,3 +1,3 @@
 window.config = {
-  service: 'http://222.212.141.34:8085'
+  service: 'https://www.easy-mock.com/mock/5d4a33951086a5199a879b67/bicycle'
 };

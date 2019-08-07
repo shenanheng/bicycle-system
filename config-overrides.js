@@ -35,7 +35,8 @@ module.exports = override(
     '@business': path.resolve(__dirname, 'src/businessComponent'),
     '@view': path.resolve(__dirname, 'src/view'),
     '@api': path.resolve(__dirname, 'src/common/service/index.js'),
-    '@': path.resolve(__dirname, 'src')
+    '@': path.resolve(__dirname, 'src'),
+    '@action':path.resolve(__dirname, 'src/redux/action')
   }),
   // antd 按需加载
   fixBabelImports('antd', {

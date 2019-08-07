@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import manageReducer from './manage';
+import rootReducer from './root';
+
 export default combineReducers({
-  queryDictionaryTablesM:manageReducer.queryDictionaryTables
+  rootState:rootReducer
 });
