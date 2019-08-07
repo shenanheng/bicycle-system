@@ -1,0 +1,34 @@
+@import '~@less/home/defConstants.less';
+.home-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-left: @leftMenuWidth;
+  height: @homeTitleHeight;
+  border-bottom: none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  background-color: #fff;
+  .tools {
+    list-style: none;
+    padding: 0 10px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    .tool {
+      list-style: none;
+      font-size: 16px;
+      .tool-content{
+        cursor: pointer;
+      }
+    }
+    li{
+      padding: 0 15px;
+    }
+  }
+  .tools-posi{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

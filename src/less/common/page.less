@@ -1,0 +1,239 @@
+// @import '../core/common.less';
+.content-main,
+.content-list {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  // padding: 10px;
+  .bc-white {
+    background-color: #fff;
+    padding: 20px;
+  }
+  // 查询条件样式
+  .query-criteria {
+    width: 100%;
+    background-color: #fff;
+    padding: 0 20px 6px 0;
+    .criteria-item {
+      display: inline-block;
+      padding: 6px 0;
+      font-size: 0;
+      label {
+        font-size: 14px;
+        text-align: right;
+        padding: 0 0 0 20px;
+      }
+      .minimum-width {
+        width: 200px !important;
+      }
+      .mindate-width {
+        width: 300px !important;
+      }
+    }
+  }
+  // 列表展示样式
+  .table-list {
+    width: 100%;
+    background-color: #fff;
+    margin-top: 10px;
+    padding: 20px 20px 10px 20px;
+    .table {
+      .btns {
+        font-size: 12px;
+        margin-right: 14px;
+        cursor: pointer;
+        .text {
+          padding-left: 6px;
+        }
+      }
+      .table-operate {
+        text-align: left;
+        .seeOrEdit {
+          // 查看
+          color: #409eff;
+        }
+        .open {
+          color: #67c23a;
+        }
+        .disable {
+          color: #f56c6c;
+        }
+        .disable-apply {
+          color: #aaa;
+          cursor: not-allowed;
+        }
+      }
+    }
+    .oper-btns {
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    .table-page {
+      width: 100%;
+      text-align: right;
+      margin-top: 10px;
+    }
+  }
+}
+.content-main {
+  overflow: auto;
+  .breadcrumbs-nav {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    a {
+      text-decoration: none;
+      color: #151515;
+      &:hover {
+        color: #539eff;
+      }
+    }
+    i {
+      color: #151515;
+      font-style: normal;
+      padding: 0 6px;
+    }
+    span {
+      color: #666;
+    }
+  }
+}
+
+.content-list {
+  .filter-field {
+    font-size: 12px;
+    .field-left {
+      padding: 0 6px;
+      display: inline-block;
+    }
+    .field-right {
+      width: 150px;
+      display: inline-block;
+      height: 28px;
+      line-height: 28px;
+      .el-input__inner {
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+  }
+}
+
+/** 横向流程图 */
+.horizontal-flow {
+  display: flex;
+  font-size: 12px;
+  .items {
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+    .process {
+      display: flex;
+      align-items: center;
+      .circular {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        line-height: 40px;
+        text-align: center;
+      }
+      .circular-yes {
+        background-color: #409eff;
+        color: #fff;
+      }
+      .circular-no {
+        background-color: #fff;
+        border: 1px solid #bbb;
+      }
+      .bar {
+        width: 45px;
+        height: 2px;
+        background-color: #ccc;
+        margin: 0 6px;
+      }
+    }
+    .role-name {
+      margin-top: 6px;
+      line-height: 1;
+    }
+  }
+}
+
+/**左边是label,右边是内容 */
+.label-text-items {
+  overflow: hidden;
+  .label-text-items-wrap-line {
+    width: 100%;
+    height: 1px;
+    padding-left: 50px;
+    margin-top: 10px;
+    .lines {
+      width: 100%;
+      height: 100%;
+      background-color: #eee;
+    }
+  }
+  .label-text-items-wrap {
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    // padding-bottom: 10px;
+    // border-bottom: 1px solid #eee;
+    .label-text-items-wrap-left {
+      flex: 1;
+    }
+    .label-text-items-wrap-right {
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .label-text-item {
+    display: flex;
+    margin-top: 20px;
+    font-size: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .label-left {
+      word-break: break-all;
+      width: 120px;
+      text-align: right;
+    }
+    .center-colon {
+      width: 10px;
+      text-align: center;
+    }
+    .text-right {
+      flex: 1;
+    }
+  }
+}
+
+/**单独的操作 */
+.single-operate {
+  .btns {
+    font-size: 14px;
+    margin-right: 14px;
+    cursor: pointer;
+    .text {
+      padding-left: 6px;
+    }
+  }
+  text-align: left;
+  .seeOrEdit {
+    // 查看
+    color: #409eff;
+  }
+  .open {
+    color: #67c23a;
+  }
+  .disable {
+    color: #f56c6c;
+  }
+  .disable-apply {
+    color: #aaa;
+    cursor: not-allowed;
+  }
+}
