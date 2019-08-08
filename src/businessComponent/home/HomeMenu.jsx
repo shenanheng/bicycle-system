@@ -39,7 +39,8 @@ class HomeMenu extends Component {
   render() {
     let { list } = this.props;
     return (
-      <Menu mode="inline"
+      <Menu
+          mode="inline"
           theme="dark"
       >
         {list.map(item => {

@@ -1,4 +1,2 @@
 // 类型查询字典列表
 export const QUERY_DICTIONARY_TABLES = 'QUERY_DICTIONARY_TABLES';
-// 查询所在省市区
-export const QUERY_PROVINCE_CITY_AREA = 'QUERY_PROVINCE_CITY_AREA';

@@ -1,18 +1,23 @@
+// react
 import React from 'react';
 import ReactDOM from 'react-dom';
+// pwd
 import * as serviceWorker from './serviceWorker';
-import './index.less';
+// redux
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import Reducer from './redux/reducer/index';
+import store from './redux/index'
+
+//组件
 import App from './App';
+
+// 配置以及样式
 import '@common/constants/config';
 import '@less/common/index.less';
 
-const store = createStore(
-  Reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+
+
+
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
