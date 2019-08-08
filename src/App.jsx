@@ -31,40 +31,38 @@ class App extends React.Component {
   }
   render() {
     let { userMenuList } = this.props;
-    let {sub} = this.state;
+    let { sub } = this.state;
     return (
       <Router>
         <Switch>
           <Route
               path="/"
               render={() => (
-              <div style={{ width: '100%', height: '100%' }}>
-                <Switch>
-                  <Route
-                      path="/home"
-                      render={() => (
-                      <Home>
-                        <Switch>
-                          {userMenuList.map((item, index) => (
-                            <Route
-                                component={sub[item.component]}
-                                key={item + index}
-                                path={item.path}
-                            />
-                          ))}
-                        </Switch>
-                      </Home>
-                    )}
-                  />
+              <Switch>
+                <Route
+                    path="/home"
+                    render={() => (
+                    <Home>
+                      <Switch>
+                        {userMenuList.map((item, index) => (
+                          <Route
+                              component={sub[item.component]}
+                              key={item + index}
+                              path={item.path}
+                          />
+                        ))}
+                        <Redirect to="/home/city" />
+                      </Switch>
+                    </Home>
+                  )}
+                />
 
-                  <Route component={Login}
-                      path="/login"
-                  />
-                </Switch>
-              </div>
+                <Route component={Login}
+                    path="/login"
+                />
+              </Switch>
             )}
           />
-          <Redirect to="/home/index" />
         </Switch>
       </Router>
     );
