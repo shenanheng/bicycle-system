@@ -1,2 +1,4 @@
-// 类型查询字典列表
-export const QUERY_DICTIONARY_TABLES = 'QUERY_DICTIONARY_TABLES';
+// 查询字典列表
+export const QUERY_DIC = 'QUERY_DIC';
+// 查询中国城市
+export const QUERY_CHINA_CITIES = 'QUERY_CHINA_CITIES';

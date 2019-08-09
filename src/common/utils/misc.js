@@ -2,28 +2,6 @@
 const crypto = require('crypto');
 
 const utils = {
-  /**
-   * 用于开始时间与结束时间的相互限制
-   * @param type 指代是开始还是结束
-   * @param value 用户选择的时间的值
-   */
-  pickerOptions: (type, value) => ({
-    disabledDate: time => {
-      let selectTime = value;
-      if (selectTime) {
-        if (!(selectTime instanceof Date)) {
-          selectTime = new Date(selectTime.replace(/\//g, '/'));
-        }
-        if (type === 'start') {
-          return selectTime < time.getTime();
-        }
-        if (type === 'end') {
-          return time.getTime() < selectTime;
-        }
-      }
-      return false;
-    },
-  }),
   // base64转file
   dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(',');
@@ -56,7 +34,7 @@ const utils = {
       return {
         birth: '',
         sex: {},
-        age: '',
+        age: ''
       };
     }
     const birth = `${idCard.substring(6, 10)}-${idCard.substring(10, 12)}-${idCard.substring(
@@ -65,12 +43,12 @@ const utils = {
     )}`;
     let sex = {
       value: '2',
-      label: '女',
+      label: '女'
     };
     if ((1 * idCard.substr(16, 1)) % 2 === 1) {
       sex = {
         value: '1',
-        label: '男',
+        label: '男'
       };
     }
     const myDate = new Date();
@@ -86,7 +64,7 @@ const utils = {
     return {
       birth,
       sex,
-      age,
+      age
     };
   },
   // 解密登录的信息并返回userInfo的对象
@@ -175,7 +153,7 @@ const utils = {
     return dec;
   },
   createTreeData({
-    list = [], id = 'id', parentId = 'parentId', rooId = 0,
+    list = [], id = 'id', parentId = 'parentId', rooId = 0
   }) {
     const tree = list.filter(father => {
       // 循环所有项
@@ -230,7 +208,7 @@ const utils = {
       });
     return {
       ids: ids.join(type),
-      names: names.join(type),
+      names: names.join(type)
     };
   },
   /**
@@ -241,7 +219,7 @@ const utils = {
    * @param {*默认返回值需要符合哪种类型} defaultValue
    */
   combinateIdCode({
-    ids, labels, type, checkType = 'multiple', defaultValue = [],
+    ids, labels, type, checkType = 'multiple', defaultValue = []
   }) {
     if (ids === null || ids.length === 0) {
       return defaultValue;
@@ -301,6 +279,6 @@ const utils = {
     } else if (errorDomList[0]) {
       errorDomList[0].scrollIntoView(false);
     }
-  },
+  }
 };
 export default utils;

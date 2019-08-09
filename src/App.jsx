@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as userAction from '@redux/action/user.js';
+import * as manageAction from '@redux/action/manage.js';
 import {
   HashRouter as Router,
   Route,
@@ -27,7 +28,10 @@ class App extends React.Component {
     }
   };
   componentDidMount() {
-    this.props.queryMenu();
+    let { queryDic, queryMenu,queryChinaCities } = this.props;
+    queryMenu();
+    queryDic();
+    queryChinaCities();
   }
   render() {
     let { userMenuList } = this.props;
@@ -77,7 +81,16 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = dispatch => ({
   queryMenu() {
+    // 查询菜单列表
     dispatch(userAction.queryUserMenu());
+  },
+  queryDic() {
+    // 查询字典
+    dispatch(manageAction.queryDic());
+  },
+  queryChinaCities() {
+    // 查询城市
+    dispatch(manageAction.queryChinaCities());
   }
 });
 export default connect(

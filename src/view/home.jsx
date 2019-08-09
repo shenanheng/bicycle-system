@@ -5,7 +5,7 @@ import HomeMenu from '@business/home/HomeMenu.jsx';
 import HomeTop from '@business/home/HomeTop.jsx';
 import '@less/home/home.less';
 import { Layout } from 'antd';
-const { Footer, Sider, Content } = Layout;
+const {  Sider, Content } = Layout;
 class Home extends React.Component {
   render() {
     let { collapsed,userMenuList } = this.props;
@@ -20,9 +20,6 @@ class Home extends React.Component {
         <Layout>
           <HomeTop />
           <Content className="home-content">{this.props.children}</Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
         </Layout>
       </Layout>
     );
