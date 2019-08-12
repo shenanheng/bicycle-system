@@ -14,5 +14,19 @@ export default {
       params,
       url: ROOT.QUERY_CITY_MANAGE_LIST
     },
+  ),
+  // 查询订单管理列表
+  queryOrderManageList: (params) => get(
+    {
+      params,
+      url: ROOT.QUERY_ORDER_MANAGE_LIST
+    },
+  ),
+  // 查询单个订单详情
+  queryOrderDetails: (params) => get(
+    {
+      params,
+      url: ROOT.QUERY_ORDER_DETAILS
+    },
   )
 };

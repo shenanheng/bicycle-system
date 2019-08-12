@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import Paging from '@common/funcComponent/Paging';
-import { Form, Select, Cascader, Button, Table,Modal } from 'antd';
+import { Form, Select, Cascader, DatePicker, Button, Table } from 'antd';
 import { connect } from 'react-redux';
 import Utils from '@common/utils/misc';
 import Api from '@api';
 let requestParams = {
   cityCode: '', // 城市
   cityName: '', // 城市的名字
-  carModeCode: '', // 用车模式
-  operateCode: '', // 运营模式
-  authorizeStateCode: '', // 加盟商授权状态
+  orderTime: '', // 订单时间
+  orderStatusCode: '', // 订单状态
   pageIndex: 1, // 当前页码
   pageSize: 15 // 每页显示的数据的条数
 };
-class cityManage extends Component {
+class orderManage extends Component {
   state = {
-    tableObj: {},
-    openCityFlag: false // 开通城市弹出框
+    tableObj: {}
   };
   componentDidMount() {
     this.queryList();
@@ -31,8 +29,6 @@ class cityManage extends Component {
   };
   resetParams = () => {
     this.props.form.resetFields();
-    requestParams.cityCode = '';
-    requestParams.cityName = '';
   };
   // 处理查询
   handleQuery = () => {
@@ -40,76 +36,135 @@ class cityManage extends Component {
     let fieldsValue = this.props.form.getFieldsValue();
     requestParams = {
       ...requestParams,
-      ...fieldsValue,
-      cityCode: requestParams.cityCode,
-      cityName: requestParams.cityName
+      ...fieldsValue
     };
     this.queryList();
   };
   // 获取城市列表
   queryList = () => {
-    Api.queryCityManageList(requestParams).then(res => {
+    Api.queryOrderManageList(requestParams).then(res => {
       this.setState({
         ...this.state,
         tableObj: res.data
       });
     });
   };
+  operate = (row, type) => {
+    if(type === 'see') { // 进入订单详情
+      this.props.history.push(`/home/orderDetails/${row.id}`)
+    }else if(type === 'order'){ // 结束订单
+
+    }
+  };
   render() {
     let { dictionaries, provinceCityAreaTree, form } = this.props;
-    let { tableObj, openCityFlag } = this.state;
+    let { tableObj } = this.state;
+    let self = this;
     const columns = [
       {
-        title: '城市ID',
+        title: '订单编号',
+        width: 120,
+        align: 'center',
         dataIndex: 'id'
       },
       {
-        title: '城市名称',
-        dataIndex: 'name'
+        title: '车辆编号',
+        width: 120,
+        align: 'center',
+        dataIndex: 'carNum'
       },
       {
-        title: '用车模式',
-        dataIndex: 'carModeCode',
-        render(carModeCode) {
-          return Utils.codeInToName(carModeCode, dictionaries.carMode);
+        title: '用户名',
+        width: 100,
+        align: 'center',
+        dataIndex: 'userName'
+      },
+      {
+        title: '手机号',
+        width: 120,
+        align: 'center',
+        dataIndex: 'phone'
+      },
+      {
+        title: '里程',
+        width: 100,
+        align: 'center',
+        dataIndex: 'distance',
+        render(distance) {
+          return `${(distance / 1000).toFixed(2)}km`;
         }
       },
       {
-        title: '营运模式',
-        dataIndex: 'operateCode',
-        render(operateCode) {
-          return Utils.codeInToName(operateCode, dictionaries.operateMode);
+        title: '行驶时长',
+        width: 100,
+        align: 'center',
+        dataIndex: 'totalTime'
+      },
+      {
+        title: '状态',
+        width: 100,
+        align: 'center',
+        dataIndex: 'orderStatusCode',
+        render(orderStatusCode) {
+          return Utils.codeInToName(orderStatusCode, dictionaries.orderStatus);
         }
       },
       {
-        title: '授权加盟商',
-        dataIndex: 'franchiseeName'
-      },
-      {
-        title: '城市管理员',
-        dataIndex: 'cityAdmins',
-        render(arr) {
-          return arr
-            .map(item => {
-              return item.userName;
-            })
-            .join(',');
+        title: '开始时间',
+        dataIndex: 'startTime',
+        align: 'center',
+        width: 180,
+        render(startTime) {
+          return Utils.formatDate(startTime, true);
         }
       },
       {
-        title: '城市开通时间',
-        dataIndex: 'openTime'
-      },
-      {
-        title: '操作时间',
-        dataIndex: 'updateTime',
-        render(updateTime) {
-          return Utils.formatDate(updateTime, true);
+        title: '结束时间',
+        dataIndex: 'endTime',
+        align: 'center',
+        width: 180,
+        render(endTime) {
+          return Utils.formatDate(endTime, true);
         }
       },
       {
-        title: '操作人',
-        dataIndex: 'sysUserName'
+        title: '订金金额',
+        width: 120,
+        align: 'center',
+        dataIndex: 'advancePay'
+      },
+      {
+        title: '实付金额',
+        width: 120,
+        align: 'center',
+        dataIndex: 'actualPay'
+      },
+      {
+        title: '操作',
+        width: 300,
+        align: 'center',
+        fixed: 'right',
+        render(...reset) {
+          return (
+            <div className="table-operate">
+              <Button
+                  className="operate-btn"
+                  onClick={() => self.operate(reset[1], 'see')}
+                  size="small"
+                  type="primary"
+              >
+                查看
+              </Button>
+              <Button className="operate-btn"
+                  onClick={() => self.operate(reset[1], 'order')}
+                  size="small"
+                  type="primary"
+              >
+                结束订单
+              </Button>
+            </div>
+          );
+        }
       }
     ];
     return (
@@ -125,41 +180,18 @@ class cityManage extends Component {
                 />
               )}
             </Form.Item>
-            <Form.Item label="用车模式">
-              {form.getFieldDecorator('carModeCode', { initialValue: '' })(
-                <Select className="form-antd-select">
-                  <Select.Option value="">全部</Select.Option>
-                  {dictionaries.carMode.map(item => (
-                    <Select.Option key={item.value}
-                        value={item.value}
-                    >
-                      {item.label}
-                    </Select.Option>
-                  ))}
-                </Select>
+            <Form.Item label="订单时间">
+              {form.getFieldDecorator('orderTime', { initialValue: '' })(
+                <DatePicker.RangePicker />
               )}
             </Form.Item>
-            <Form.Item label="运营模式">
-              {form.getFieldDecorator('operateCode', { initialValue: '' })(
-                <Select className="form-antd-select">
-                  <Select.Option value="">全部</Select.Option>
-                  {dictionaries.operateMode.map(item => (
-                    <Select.Option key={item.value}
-                        value={item.value}
-                    >
-                      {item.label}
-                    </Select.Option>
-                  ))}
-                </Select>
-              )}
-            </Form.Item>
-            <Form.Item label="加盟商授权状态">
-              {form.getFieldDecorator('authorizeStateCode', {
+            <Form.Item label="订单状态">
+              {form.getFieldDecorator('orderStatusCode', {
                 initialValue: ''
               })(
                 <Select className="form-antd-select">
                   <Select.Option value="">全部</Select.Option>
-                  {dictionaries.authorizeState.map(item => (
+                  {dictionaries.orderStatus.map(item => (
                     <Select.Option key={item.value}
                         value={item.value}
                     >
@@ -181,30 +213,18 @@ class cityManage extends Component {
             </Form.Item>
           </Form>
         </div>
-        <div className="btn-list">
-          <Button type="primary">开通城市</Button>
-        </div>
         <Table
             columns={columns}
             dataSource={tableObj.list}
             pagination={false}
             rowKey="id"
+            scroll={{ x: 1680 }}
         />
         <Paging
             className="table-page"
             pageChange={this.pageChange}
             total={tableObj.totalCount}
         />
-        {/* 开通城市 */}
-        {/* todoList */}
-        <Modal
-            cancelText="取消"
-            okText="确定"
-            title="开通城市"
-            visible={openCityFlag}
-        >
-
-        </Modal>
       </div>
     );
   }
@@ -233,5 +253,5 @@ export default connect(
         requestParams = { ...requestParams, ...changedValues };
       }
     }
-  })(cityManage)
+  })(orderManage)
 );

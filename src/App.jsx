@@ -13,7 +13,8 @@ import Login from './view/login';
 import CarMap from './view/carMap';
 import CityManage from './view/cityManage';
 import HomePage from './view/homePage';
-import OrderManage from './view/orderManage';
+import OrderManage from './view/orderManage/orderManage';
+import orderDetails from './view/orderManage/orderDetails';
 import RightSet from './view/rightSet';
 import StaffManage from './view/staffManage';
 class App extends React.Component {
@@ -55,7 +56,11 @@ class App extends React.Component {
                               path={item.path}
                           />
                         ))}
-                        <Redirect to="/home/city" />
+                        <Route
+                            component={orderDetails}
+                            path="/home/orderDetails/:id"
+                        />
+                        <Redirect to="/home/order" />
                       </Switch>
                     </Home>
                   )}

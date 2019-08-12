@@ -5,20 +5,31 @@
 .form-antd-select{
   width:200px !important; 
 }
-
+@cnt-padding:20px;
 .cnt {
   width: 100%;
   height: 100%;
   background-color: #fff;
   overflow: auto;
   .screen-condition {
-    padding: 20px;
+    padding: @cnt-padding;
   }
   .table-page{
-    padding: 20px;
+    padding: @cnt-padding;
     text-align:right;
   }
   .btn-list{
-    padding:20px;
+    padding:@cnt-padding;
+  }
+  .table-operate{
+    .operate-btn{
+      margin-right:10px;
+    }
+  }
+  .details-info{
+    padding: @cnt-padding;
+  }
+  .foot-btns{
+    padding: @cnt-padding;
   }
 }

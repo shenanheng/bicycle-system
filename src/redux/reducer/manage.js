@@ -3,7 +3,8 @@ const manageState = {
   dictionaries: {
     carMode: [], // 用车模式
     operateMode: [], // 运营模式
-    authorizeState: [] // 加盟商授权状态
+    authorizeState: [], // 加盟商授权状态
+    orderStatus:[] // 订单状态
   },
   provinceCityAreaOld: [],
   provinceCityAreaTree: []
