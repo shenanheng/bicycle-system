@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Paging from '@common/funcComponent/Paging';
-import { Form, Select, Cascader, Button, Table } from 'antd';
+import { Form, Select, Cascader, Button, Table,Modal } from 'antd';
 import { connect } from 'react-redux';
 import Utils from '@common/utils/misc';
 import Api from '@api';
 let requestParams = {
   cityCode: '', // 城市
+  cityName: '', // 城市的名字
   carModeCode: '', // 用车模式
   operateCode: '', // 运营模式
   authorizeStateCode: '', // 加盟商授权状态
@@ -14,7 +15,8 @@ let requestParams = {
 };
 class cityManage extends Component {
   state = {
-    cityManageObj: {}
+    cityManageObj: {},
+    openCityFlag: true // 开通城市弹出框
   };
   componentDidMount() {
     this.queryList();
@@ -27,16 +29,20 @@ class cityManage extends Component {
     };
     this.queryList();
   };
+  resetParams = () => {
+    this.props.form.resetFields();
+    requestParams.cityCode = '';
+    requestParams.cityName = '';
+  };
   // 处理查询
   handleQuery = () => {
     // 获取表单的值
     let fieldsValue = this.props.form.getFieldsValue();
-    // let {cityCode} = fieldsValue;
-    // 城市下拉选值的处理
-    // const { ids: cityCode, names: cityName } = utils.splieIdCode(cityCode, '-');
     requestParams = {
       ...requestParams,
-      ...fieldsValue
+      ...fieldsValue,
+      cityCode: requestParams.cityCode,
+      cityName: requestParams.cityName
     };
     this.queryList();
   };
@@ -51,7 +57,7 @@ class cityManage extends Component {
   };
   render() {
     let { dictionaries, provinceCityAreaTree, form } = this.props;
-    let { cityManageObj } = this.state;
+    let { cityManageObj, openCityFlag } = this.state;
     const columns = [
       {
         title: '城市ID',
@@ -171,9 +177,12 @@ class cityManage extends Component {
               >
                 查询
               </Button>
-              <Button>重置</Button>
+              <Button onClick={this.resetParams}>重置</Button>
             </Form.Item>
           </Form>
+        </div>
+        <div className="btn-list">
+          <Button type="primary">开通城市</Button>
         </div>
         <Table
             columns={columns}
@@ -186,6 +195,15 @@ class cityManage extends Component {
             pageChange={this.pageChange}
             total={cityManageObj.totalCount}
         />
+        {/* 开通城市 */}
+        <Modal
+            cancelText="取消"
+            okText="确定"
+            title="开通城市"
+            visible={openCityFlag}
+        >
+
+        </Modal>
       </div>
     );
   }
@@ -201,8 +219,18 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null
-)(Form.create({
-  onValuesChange(props, changedValues, allValues){
-
-  }
-})(cityManage));
+)(
+  Form.create({
+    onValuesChange(props, changedValues) {
+      if (changedValues.hasOwnProperty('cityCode')) {
+        const { ids: cityCode, names: cityName } = Utils.splieIdCode(
+          changedValues['cityCode'],
+          '-'
+        );
+        requestParams = { ...requestParams, cityCode, cityName };
+      } else {
+        requestParams = { ...requestParams, ...changedValues };
+      }
+    }
+  })(cityManage)
+);
