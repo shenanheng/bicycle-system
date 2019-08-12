@@ -23,7 +23,7 @@ class orderDetails extends Component {
     });
   };
   render() {
-    const { dictionaries } = this.props;
+    const { dictionaries,history } = this.props;
     const { info } = this.state;
     return (
       <div className="cnt">
@@ -66,8 +66,9 @@ class orderDetails extends Component {
             ).toFixed(2)}km`}</Descriptions.Item>
           </Descriptions>
         </div>
+        <div></div>
         <div className="foot-btns">
-          <Button>返回</Button>
+          <Button onClick={history.goBack}>返回</Button>
         </div>
       </div>
     );
