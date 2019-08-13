@@ -11,12 +11,13 @@ import {
 import Home from './view/home';
 import Login from './view/login';
 import CarMap from './view/carMap';
-import CityManage from './view/cityManage';
+import CityManage from './view/cityManage/cityManage';
 import HomePage from './view/homePage';
 import OrderManage from './view/orderManage/orderManage';
 import orderDetails from './view/orderManage/orderDetails';
 import RightSet from './view/rightSet';
-import StaffManage from './view/staffManage';
+import StaffManage from './view/staffManage/staffManage';
+import AddOrEditStaff from './view/staffManage/addOrEditStaff';
 class App extends React.Component {
   state = {
     sub: {
@@ -60,7 +61,15 @@ class App extends React.Component {
                             component={orderDetails}
                             path="/home/orderDetails/:id"
                         />
-                        <Redirect to="/home/order" />
+                        <Route
+                            component={AddOrEditStaff}
+                            path="/home/newStaff/:type/:id"
+                        />
+                         <Route
+                             component={AddOrEditStaff}
+                             path="/home/newStaff/:type"
+                         />
+                        <Redirect to="/home/staff" />
                       </Switch>
                     </Home>
                   )}

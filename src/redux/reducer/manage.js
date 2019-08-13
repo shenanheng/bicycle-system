@@ -4,7 +4,9 @@ const manageState = {
     carMode: [], // 用车模式
     operateMode: [], // 运营模式
     authorizeState: [], // 加盟商授权状态
-    orderStatus:[] // 订单状态
+    orderStatus: [], // 订单状态
+    sex: [], // 性别,
+    marriage: [] // 婚姻
   },
   provinceCityAreaOld: [],
   provinceCityAreaTree: []
@@ -43,7 +45,7 @@ function handleCities(data) {
       });
     });
   });
-  return provinceCityAreaTree
+  return provinceCityAreaTree;
 }
 export default (state = manageState, action) => {
   let { type, data } = action;
@@ -54,7 +56,6 @@ export default (state = manageState, action) => {
       return { ...state, dictionaries: data };
     // 中国所有的城市
     case `${C.QUERY_CHINA_CITIES}_SAGA`:
-
       return {
         ...state,
         provinceCityAreaOld: data,
