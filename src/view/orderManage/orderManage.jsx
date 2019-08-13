@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import Paging from '@common/funcComponent/Paging';
-import { Form, Select, Cascader, DatePicker, Button, Table } from 'antd';
+import {
+  Form,
+  Select,
+  Cascader,
+  DatePicker,
+  Button,
+  Table,
+  Modal,
+  Message
+} from 'antd';
 import { connect } from 'react-redux';
 import Utils from '@common/utils/misc';
 import Api from '@api';
 let requestParams = {
+  city: '',
   cityCode: '', // 城市
   cityName: '', // 城市的名字
   orderTime: '', // 订单时间
+  orderStartTime: '', // 订单开始时间
+  orderEndTime: '', // 订单结束时间
   orderStatusCode: '', // 订单状态
   pageIndex: 1, // 当前页码
   pageSize: 15 // 每页显示的数据的条数
 };
 class orderManage extends Component {
   state = {
-    tableObj: {}
+    tableObj: {},
+    endBikeInfo: {
+      battery: 100
+    },
+    endBikeFlag: false
   };
   componentDidMount() {
     this.queryList();
@@ -44,21 +60,44 @@ class orderManage extends Component {
   queryList = () => {
     Api.queryOrderManageList(requestParams).then(res => {
       this.setState({
-        ...this.state,
         tableObj: res.data
       });
     });
   };
   operate = (row, type) => {
-    if(type === 'see') { // 进入订单详情
-      this.props.history.push(`/home/orderDetails/${row.id}`)
-    }else if(type === 'order'){ // 结束订单
-
+    if (type === 'see') {
+      // 进入订单详情
+      this.props.history.push(`/home/orderDetails/${row.id}`);
+    } else if (type === 'order') {
+      Api.queryEndBikeInfo({
+        id: row.id
+      }).then(res => {
+        this.setState({
+          endBikeFlag: true,
+          endBikeInfo: res.data
+        });
+      });
     }
+  };
+  handleOk = () => {
+    Api.finishOrder({
+      id: this.state.endBikeInfo.id
+    }).then(res => {
+      Message.success(res.msg);
+      this.setState({
+        endBikeFlag: false
+      })
+      this.queryList();
+    });
+  };
+  handleCancel = () => {
+    this.setState({
+      endBikeFlag: false
+    });
   };
   render() {
     let { dictionaries, provinceCityAreaTree, form } = this.props;
-    let { tableObj } = this.state;
+    let { tableObj, endBikeInfo, endBikeFlag } = this.state;
     let self = this;
     const columns = [
       {
@@ -155,7 +194,8 @@ class orderManage extends Component {
               >
                 查看
               </Button>
-              <Button className="operate-btn"
+              <Button
+                  className="operate-btn"
                   onClick={() => self.operate(reset[1], 'order')}
                   size="small"
                   type="primary"
@@ -172,7 +212,7 @@ class orderManage extends Component {
         <div className="screen-condition">
           <Form layout="inline">
             <Form.Item label="城市">
-              {form.getFieldDecorator('cityCode', { initialValue: [] })(
+              {form.getFieldDecorator('city', { initialValue: [] })(
                 <Cascader
                     className="form-antd-cascader"
                     options={provinceCityAreaTree}
@@ -225,6 +265,45 @@ class orderManage extends Component {
             pageChange={this.pageChange}
             total={tableObj.totalCount}
         />
+        <Modal
+            cancelText="取消"
+            okText="确定"
+            onCancel={this.handleCancel}
+            onOk={this.handleOk}
+            title="结束订单"
+            visible={endBikeFlag}
+        >
+          <Form layout="horizontal">
+            <Form.Item
+                label="车辆编号"
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 19 }}
+            >
+              {endBikeInfo.carNum}
+            </Form.Item>
+            <Form.Item
+                label="剩余电量"
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 19 }}
+            >
+              {`${endBikeInfo.battery}%`}
+            </Form.Item>
+            <Form.Item
+                label="行程开始时间"
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 19 }}
+            >
+              {endBikeInfo.startTime}
+            </Form.Item>
+            <Form.Item
+                label="当前位置"
+                labelCol={{ span: 5 }}
+                wrapperCol={{ span: 19 }}
+            >
+              {endBikeInfo.location}
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     );
   }
@@ -243,12 +322,21 @@ export default connect(
 )(
   Form.create({
     onValuesChange(props, changedValues) {
-      if (changedValues.hasOwnProperty('cityCode')) {
+      if (changedValues.hasOwnProperty('city')) {
         const { ids: cityCode, names: cityName } = Utils.splieIdCode(
           changedValues['cityCode'],
           '-'
         );
         requestParams = { ...requestParams, cityCode, cityName };
+      } else if (changedValues.hasOwnProperty('orderTime')) {
+        let timeRange = changedValues['orderTime'];
+        let orderStartTime = '';
+        let orderEndTime = '';
+        if (timeRange.length > 0) {
+          orderStartTime = timeRange[0].valueOf();
+          orderEndTime = timeRange[1].valueOf();
+        }
+        requestParams = { ...requestParams, orderStartTime, orderEndTime };
       } else {
         requestParams = { ...requestParams, ...changedValues };
       }

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Descriptions, Button } from 'antd';
+import TrajectoryMap from '@/businessComponent/cityManage/trajectoryMap';
 import Utils from '@common/utils/misc';
 import Api from '@api';
 class orderDetails extends Component {
   state = {
     info: {
       basic: {}, // 基础数据
-      trajectory: {} // 行驶轨迹
+      trajectory: {}, // 行驶轨迹
+      serviceArea: [], // 区域服务范围
+      userRoute: [] // 用户的行驶轨迹
     }
   };
   componentDidMount() {
@@ -15,15 +18,15 @@ class orderDetails extends Component {
   }
   // 获取订单详情
   queryDetails = () => {
-    Api.queryOrderDetails().then(res => {
+    const {match} = this.props;
+    Api.queryOrderDetails(match.params).then(res => {
       this.setState({
-        ...this.state,
         info: res.data
       });
     });
   };
   render() {
-    const { dictionaries,history } = this.props;
+    const { dictionaries, history } = this.props;
     const { info } = this.state;
     return (
       <div className="cnt">
@@ -66,7 +69,10 @@ class orderDetails extends Component {
             ).toFixed(2)}km`}</Descriptions.Item>
           </Descriptions>
         </div>
-        <div></div>
+        <TrajectoryMap
+            serviceArea={info.serviceArea}
+            userRoute={info.userRoute}
+        />
         <div className="foot-btns">
           <Button onClick={history.goBack}>返回</Button>
         </div>

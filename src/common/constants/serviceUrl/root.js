@@ -9,3 +9,7 @@ export const QUERY_CITY_MANAGE_LIST = getApi('/cityManageList');
 export const QUERY_ORDER_MANAGE_LIST = getApi('/orderManageList');
 // 查询单个订单详情
 export const QUERY_ORDER_DETAILS = getApi('/getOrderDetails');
+// 获取结束订单的详情
+export const QUERY_END_BIKE_INFO = getApi('/getEndBikeInfo');
+// 结束订单的详情
+export const FINISH_ORDER = getApi('/finishOrder');

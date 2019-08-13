@@ -16,6 +16,8 @@ const METHODS = {
   DELETE: 'delete'
 };
 const checkRespStatus = resp => {
+  let loading = document.getElementById('ajaxLoading');
+  loading.style.display = 'none';
   if (resp.status !== 200) {
     console.log('Server error occurred');
     return window.Promise.reject('Server error occurred');
@@ -71,9 +73,13 @@ const request = ({
     httpUrl += newParams;
   }
   httpUrl = window.config[server] + httpUrl;
+  let loading = document.getElementById('ajaxLoading');
+  loading.style.display = 'block';
   return axios(httpUrl, options)
     .then(checkRespStatus)
     .catch(error => {
+      let loading = document.getElementById('ajaxLoading');
+      loading.style.display = 'none';
       if (!error.code && !navigator.onLine) {
         // 因无网络而出错的情况
         message.error('网络出错，请重试');

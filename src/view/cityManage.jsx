@@ -50,7 +50,6 @@ class cityManage extends Component {
   queryList = () => {
     Api.queryCityManageList(requestParams).then(res => {
       this.setState({
-        ...this.state,
         tableObj: res.data
       });
     });
