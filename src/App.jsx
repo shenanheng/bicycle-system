@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import Home from './view/home';
 import Login from './view/login';
-import CarMap from './view/carMap';
+import CarMap from './view/carMap/carMap';
 import CityManage from './view/cityManage/cityManage';
 import HomePage from './view/homePage';
 import OrderManage from './view/orderManage/orderManage';
@@ -69,7 +69,7 @@ class App extends React.Component {
                              component={AddOrEditStaff}
                              path="/home/newStaff/:type"
                          />
-                        <Redirect to="/home/staff" />
+                        <Redirect to="/home/carMap" />
                       </Switch>
                     </Home>
                   )}
@@ -78,6 +78,7 @@ class App extends React.Component {
                 <Route component={Login}
                     path="/login"
                 />
+                <Redirect to="/home" />
               </Switch>
             )}
           />

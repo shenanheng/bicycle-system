@@ -61,5 +61,11 @@ export default {
     post({
       params,
       url: ROOT.DEL_STAFF
+    }),
+  // 自行车区域查询
+  queryBikeList: params =>
+    get({
+      params,
+      url: ROOT.QUERY_BIKE_LIST
     })
 };
