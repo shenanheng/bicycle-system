@@ -34,11 +34,11 @@ class staffManage extends Component {
   operate = (row, type) => {
     let self = this;
     if (type === 'new') {
-      this.props.history.push('/home/newStaff/new')
+      this.props.history.push('/home/newStaff/new');
     } else if (type === 'see') {
-      // this.props.history.push(`/home/orderDetails/${row.id}`);
+      this.props.history.push(`/home/newStaff/detail/${row.staffId}`);
     } else if (type === 'edit') {
-      this.props.history.push(`/home/newStaff/edit/${row.staffId}`)
+      this.props.history.push(`/home/newStaff/edit/${row.staffId}`);
       // 编辑
     } else if (type === 'del') {
       // 删除
@@ -92,14 +92,7 @@ class staffManage extends Component {
         align: 'center',
         dataIndex: 'peopleStatus',
         render(peopleStatus) {
-          let config = {
-            0: '咸鱼一条',
-            1: '风华浪子',
-            2: '北大才子',
-            3: '百度FE',
-            4: '创业者'
-          };
-          return config[peopleStatus];
+          return Utils.codeInToName(peopleStatus, dictionaries.peopleStatus);
         }
       },
       {

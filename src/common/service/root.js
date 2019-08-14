@@ -44,6 +44,12 @@ export default {
       params,
       url: ROOT.ADD_STAFF
     }),
+  // 查看员工
+  seeStaff: params =>
+    get({
+      params,
+      url: ROOT.SEE_STAFF
+    }),
   // 编辑员工
   editStaff: params =>
     post({

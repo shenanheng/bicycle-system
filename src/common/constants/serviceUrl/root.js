@@ -17,7 +17,9 @@ export const FINISH_ORDER = getApi('/finishOrder');
 export const QUERY_STAFF_MANAGE_LIST = getApi('/staffManageList');
 // 新增员工
 export const ADD_STAFF = getApi('/addStaff');
-// 删除员工
+// 查看员工
+export const SEE_STAFF = getApi('/seeStaff');
+// 更新员工
 export const EDIT_STAFF = getApi('/updateStaff');
 // 删除员工
 export const DEL_STAFF = getApi('/delStaff');

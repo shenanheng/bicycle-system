@@ -6,7 +6,8 @@ const manageState = {
     authorizeState: [], // 加盟商授权状态
     orderStatus: [], // 订单状态
     sex: [], // 性别,
-    marriage: [] // 婚姻
+    marriage: [], // 婚姻
+    peopleStatus:[] // 人员状态
   },
   provinceCityAreaOld: [],
   provinceCityAreaTree: []
