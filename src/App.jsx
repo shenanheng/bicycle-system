@@ -9,13 +9,13 @@ import {
   Redirect
 } from 'react-router-dom';
 import Home from './view/home';
-import Login from './view/login';
+import Login from './view/login/login';
 import CarMap from './view/carMap/carMap';
 import CityManage from './view/cityManage/cityManage';
-import HomePage from './view/homePage';
+import HomePage from './view/homePage/homePage';
 import OrderManage from './view/orderManage/orderManage';
 import orderDetails from './view/orderManage/orderDetails';
-import RightSet from './view/rightSet';
+import RightSet from './view/rightSet/rightSet';
 import StaffManage from './view/staffManage/staffManage';
 import AddOrEditStaff from './view/staffManage/addOrEditStaff';
 class App extends React.Component {
@@ -69,7 +69,7 @@ class App extends React.Component {
                              component={AddOrEditStaff}
                              path="/home/newStaff/:type"
                          />
-                        <Redirect to="/home/carMap" />
+                        <Redirect to="/home/rightSet" />
                       </Switch>
                     </Home>
                   )}

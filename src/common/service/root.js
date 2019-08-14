@@ -67,5 +67,17 @@ export default {
     get({
       params,
       url: ROOT.QUERY_BIKE_LIST
+    }),
+  // 用户权限列表
+  queryUserRightList: params =>
+    get({
+      params,
+      url: ROOT.QUERY_USER_RIGHT_LIST
+    }),
+  // 更新用户权限
+  editUserRight: params =>
+    post({
+      params,
+      url: ROOT.EDIT_USER_RIGHT
     })
 };

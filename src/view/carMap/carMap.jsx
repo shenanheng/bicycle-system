@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Select, DatePicker, Button } from 'antd';
 import { connect } from 'react-redux';
-import Utils from '@common/utils/misc';
 import Api from '@api';
 let requestParams = {
   orderTime: '', // 订单时间

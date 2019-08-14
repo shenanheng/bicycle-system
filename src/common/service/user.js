@@ -9,6 +9,13 @@ export default {
       url: USER.QUERY_MENU_BY_USER
     },
   ),
+   // 根据用户来查询人员
+   queryUserListByUser: (params) => get(
+    {
+      params,
+      url: USER.QUERY_USER_LIST_BY_USER
+    },
+  ),
   aa: (params) => post(
     {
       params,

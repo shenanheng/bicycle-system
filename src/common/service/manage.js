@@ -21,5 +21,12 @@ export default {
       params,
       url: MANAGE.QUERY_CHINA_CITIES
     },
+  ),
+  // 添加字典
+  addDictionaries: (params) => post(
+    {
+      params,
+      url: MANAGE.ADD_DICTIONARIES
+    },
   )
 };

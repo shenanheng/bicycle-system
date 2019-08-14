@@ -7,7 +7,10 @@ const manageState = {
     orderStatus: [], // 订单状态
     sex: [], // 性别,
     marriage: [], // 婚姻
-    peopleStatus:[] // 人员状态
+    peopleStatus:[], // 人员状态
+    role:[], // 角色列表
+    isEnable:[] // 启用与禁用
+
   },
   provinceCityAreaOld: [],
   provinceCityAreaTree: []

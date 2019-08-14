@@ -25,3 +25,7 @@ export const EDIT_STAFF = getApi('/updateStaff');
 export const DEL_STAFF = getApi('/delStaff');
 // 自行车区域列表查询
 export const QUERY_BIKE_LIST = getApi('/bikeList');
+// 用户权限列表
+export const QUERY_USER_RIGHT_LIST = getApi('/userRightList');
+// 更新用户权限
+export const EDIT_USER_RIGHT = getApi('/updateUserRight');

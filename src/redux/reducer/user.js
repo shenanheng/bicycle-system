@@ -1,5 +1,4 @@
 import * as C from '../types/userTypes';
-
 const userState = {
   userMenuList: [] // 用户菜单列表
 };

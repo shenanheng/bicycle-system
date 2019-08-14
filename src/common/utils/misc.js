@@ -255,30 +255,6 @@ const utils = {
     // 判断是否是图片
     const reg = /(jpg|png|gif|bmp|jpeg|JPG|PNG|GIF|BMP|JPEG)/i;
     return reg.test(fileSuffix);
-  },
-  scrollToInvalidFormItem() {
-    // 自动滚入到错误提示里面
-    const errorDomList = document.querySelectorAll('.el-form-item.is-error');
-    let neededFocusDom;
-    let flag = true;
-    for (let i = errorDomList.length - 1; i >= 0; i -= 1) {
-      const dom = errorDomList[i].querySelector('input');
-      errorDomList[i].querySelectorAll('div');
-      neededFocusDom = dom || neededFocusDom;
-      const nofocusElement = errorDomList[i].querySelectorAll('div.nofocus');
-      if (nofocusElement.length > 0) {
-        flag = false;
-      } else {
-        flag = true;
-      }
-    }
-    if (neededFocusDom) {
-      if (flag) {
-        neededFocusDom.focus();
-      }
-    } else if (errorDomList[0]) {
-      errorDomList[0].scrollIntoView(false);
-    }
   }
 };
 export default utils;
