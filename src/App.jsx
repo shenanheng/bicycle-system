@@ -61,7 +61,7 @@ class App extends React.Component {
                              component={AddOrEditStaff}
                              path="/home/newStaff/:type"
                          />
-                        <Redirect to="/home/rightSet" />
+                        <Redirect to="/home/index" />
                       </Switch>
                     </Home>
                   )}

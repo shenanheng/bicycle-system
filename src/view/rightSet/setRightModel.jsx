@@ -6,7 +6,7 @@ class setRightModel extends Component {
   onCheck = checkedKeys => {
     this.props.changeModel({
       type: 'set',
-      data: checkedKeys
+      data: checkedKeys.join(',')
     });
   };
   renderTreeNodes = (data, key = '') => {
@@ -80,7 +80,7 @@ class setRightModel extends Component {
           <Form.Item label="菜单列表">
             <Tree
                 checkable
-                checkedKeys={row.menus}
+                checkedKeys={row.menus.split(',')}
                 defaultExpandAll
                 onCheck={checkedKeys => this.onCheck(checkedKeys)}
             >

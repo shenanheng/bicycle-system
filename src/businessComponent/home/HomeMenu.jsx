@@ -6,6 +6,14 @@ class HomeMenu extends Component {
   static defaultProps = {
     list: []
   };
+  state={
+    currentMenu:'/home/index'
+  }
+  handleMenu =(e) => {
+    this.setState({
+      currentMenu:e.key
+    })
+  }
   renderSubMenu = ({ key, icon, title, children }) => {
     return (
       <Menu.SubMenu
@@ -38,9 +46,12 @@ class HomeMenu extends Component {
   };
   render() {
     let { list } = this.props;
+    const {currentMenu} = this.state;
     return (
       <Menu
           mode="inline"
+          onClick={this.handleMenu}
+          selectedKeys={[currentMenu]}
           theme="dark"
       >
         {list.map(item => {
