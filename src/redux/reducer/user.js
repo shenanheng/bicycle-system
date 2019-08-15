@@ -1,6 +1,7 @@
 import * as C from '../types/userTypes';
 const userState = {
-  userMenuList: [] // 用户菜单列表
+  userMenuList: [], // 用户菜单列表
+  loginInfo: {} // 登录信息
 };
 
 export default (state = userState, action) => {
@@ -9,7 +10,13 @@ export default (state = userState, action) => {
     case `${C.MENU_BY_USER}_SAGA`:
       return {
         ...state,
-        userMenuList:action.data
+        userMenuList: action.data
+      };
+    // 登录信息
+    case `${C.LOGIN_IN}`:
+      return {
+        ...state,
+        loginInfo: action.data
       };
     default:
       return { ...state };

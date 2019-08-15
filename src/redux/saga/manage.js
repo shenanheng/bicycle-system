@@ -8,7 +8,7 @@ export function* queryDic(action) {
     yield put({ type: `${action.type}_SAGA`, data: res.data });
     return;
   } catch (e) {
-    console.log('请求错误');
+    console.log(e,'请求错误');
   }
 }
 

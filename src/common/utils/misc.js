@@ -37,10 +37,10 @@ const utils = {
         age: ''
       };
     }
-    const birth = `${idCard.substring(6, 10)}-${idCard.substring(10, 12)}-${idCard.substring(
-      12,
-      14,
-    )}`;
+    const birth = `${idCard.substring(6, 10)}-${idCard.substring(
+      10,
+      12
+    )}-${idCard.substring(12, 14)}`;
     let sex = {
       value: '2',
       label: '女'
@@ -56,8 +56,8 @@ const utils = {
     const day = myDate.getDate();
     let age = myDate.getFullYear() - idCard.substring(6, 10) - 1;
     if (
-      idCard.substring(10, 12) < month
-      || (idCard.substring(10, 12) === month && idCard.substring(12, 14) <= day)
+      idCard.substring(10, 12) < month ||
+      (idCard.substring(10, 12) === month && idCard.substring(12, 14) <= day)
     ) {
       age += 1;
     }
@@ -69,7 +69,12 @@ const utils = {
   },
   // 解密登录的信息并返回userInfo的对象
   decUserInfo() {
-    return JSON.parse(this.decAse192(JSON.parse(localStorage.getItem('userInfo')), 'userInfo'));
+    let login = localStorage.getItem('login');
+    if (typeof login === 'string' && login !== '') {
+      return JSON.parse(this.decAse192(login, 'login'));
+    } else {
+      return {};
+    }
   },
   // button的显示与否
   showButtonFlag(val) {
@@ -120,12 +125,21 @@ const utils = {
       http.send(null);
     });
   },
+  judgeIsLogin() {
+    const userObj = utils.decUserInfo();
+    // 判断是否登录
+    if (!(userObj && userObj.token)) {
+      utils.signOut();
+      return false;
+    }
+    return true;
+  },
   // 退出登录
   signOut() {
     // 清空登录
-    localStorage.clear();
+    localStorage.removeItem('login');
     const ipHost = `${window.location.protocol}//${window.location.host}`;
-    window.location.href = `${ipHost}/server_frame/login`;
+    window.location.href = `${ipHost}#/login`;
   },
   /**
    * @aes192加密模块
@@ -152,13 +166,13 @@ const utils = {
     dec += decipher.final('utf8'); // 编码方式从utf-8;
     return dec;
   },
-  createTreeData({
-    list = [], id = 'id', parentId = 'parentId', rooId = 0
-  }) {
+  createTreeData({ list = [], id = 'id', parentId = 'parentId', rooId = 0 }) {
     const tree = list.filter(father => {
       // 循环所有项
       const fatherCopy = father;
-      const branchArr = list.filter(child => fatherCopy[id] === child[parentId]); // 返回每一项的子级数组
+      const branchArr = list.filter(
+        child => fatherCopy[id] === child[parentId]
+      ); // 返回每一项的子级数组
       if (branchArr.length > 0) {
         fatherCopy.children = branchArr; // 如果存在子级，则给父级添加一个children属性，并赋值
       }
@@ -219,7 +233,11 @@ const utils = {
    * @param {*默认返回值需要符合哪种类型} defaultValue
    */
   combinateIdCode({
-    ids, labels, type, checkType = 'multiple', defaultValue = []
+    ids,
+    labels,
+    type,
+    checkType = 'multiple',
+    defaultValue = []
   }) {
     if (ids === null || ids.length === 0) {
       return defaultValue;
@@ -227,7 +245,9 @@ const utils = {
     const arrayIds = ids.toString().split(type);
     const arrayLabels = labels.toString().split(type);
     if (checkType === 'multiple') {
-      return arrayIds.map((item, index) => `${item}${type}${arrayLabels[index]}`);
+      return arrayIds.map(
+        (item, index) => `${item}${type}${arrayLabels[index]}`
+      );
     }
     return `${arrayIds}${type}${arrayLabels}`;
   },

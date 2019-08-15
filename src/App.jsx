@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as userAction from '@redux/action/user.js';
-import * as manageAction from '@redux/action/manage.js';
 import {
   HashRouter as Router,
   Route,
@@ -29,12 +27,6 @@ class App extends React.Component {
       StaffManage
     }
   };
-  componentDidMount() {
-    let { queryDic, queryMenu,queryChinaCities } = this.props;
-    queryMenu();
-    queryDic();
-    queryChinaCities();
-  }
   render() {
     let { userMenuList } = this.props;
     let { sub } = this.state;
@@ -94,21 +86,8 @@ function mapStateToProps(state) {
     userMenuList
   };
 }
-const mapDispatchToProps = dispatch => ({
-  queryMenu() {
-    // 查询菜单列表
-    dispatch(userAction.queryUserMenu());
-  },
-  queryDic() {
-    // 查询字典
-    dispatch(manageAction.queryDic());
-  },
-  queryChinaCities() {
-    // 查询城市
-    dispatch(manageAction.queryChinaCities());
-  }
-});
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(App);

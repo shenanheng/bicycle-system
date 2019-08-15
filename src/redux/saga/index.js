@@ -4,7 +4,6 @@ import * as USER_TYPES from '../types/userTypes';
 import * as MANAGE_TYPES from '../types/manageTypes';
 import * as userSaga from './user';
 import * as manageSaga from './manage';
-
 function* mySaga() {
   // user
   yield takeEvery(USER_TYPES.MENU_BY_USER, userSaga.queryUserMenu);
