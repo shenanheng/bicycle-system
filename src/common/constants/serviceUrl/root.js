@@ -29,3 +29,5 @@ export const QUERY_BIKE_LIST = getApi('/bikeList');
 export const QUERY_USER_RIGHT_LIST = getApi('/userRightList');
 // 更新用户权限
 export const EDIT_USER_RIGHT = getApi('/updateUserRight');
+// 授权用户
+export const UPDATE_USER_AUTHORIZE = getApi('/updateUserAuthorize');

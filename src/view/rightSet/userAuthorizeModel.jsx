@@ -18,7 +18,6 @@ class userAuthorizeModel extends Component {
       row,
       handleCancel,
       handleOk,
-      form,
       dictionaries,
       userList,
       targetKeys

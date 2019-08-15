@@ -48,7 +48,9 @@ class rightSet extends Component {
         [`${type}Flag`]: true
       });
     } else if (type === 'authorize') {
-      Api.queryUserListByUser().then(res => {
+      Api.queryUserListByUser({
+        id: row.id
+      }).then(res => {
         let targetKeys = [];
         let userList = res.data.map(item => {
           const data = {
@@ -72,20 +74,19 @@ class rightSet extends Component {
   };
   changeModel = res => {
     const { type, data } = res;
-    console.log(type,type === 'authorize')
     if (type === 'set') {
       this.setState({
         row: { ...this.state.row, menus: data }
       });
     } else if (type === 'authorize') {
       this.setState({
-        targetKeys:data
+        targetKeys: data
       });
     }
   };
   handleOk = type => {
-    if (type === 'new' || type === 'set') {
-      let { row } = this.state;
+    if (type === 'new' || type === 'set' || type === 'authorize') {
+      let { row, targetKeys } = this.state;
       let form = this[`${type}Form`].props.form;
       form.validateFields((err, values) => {
         if (!err) {
@@ -98,7 +99,10 @@ class rightSet extends Component {
                   id: row.id,
                   menus: row.menus
                 })
-              : '';
+              : Api.updateUserAuthorize({
+                  id: row.id,
+                  target: targetKeys.join(',')
+                });
           api.then(res => {
             Message.success(res.msg);
             this.setState(
@@ -253,7 +257,7 @@ class rightSet extends Component {
               row={row}
               targetKeys={targetKeys}
               userList={userList}
-              wrappedComponentRef={form => (this.authorizeFlagForm = form)}
+              wrappedComponentRef={form => (this.authorizeForm = form)}
           />
         ) : (
           ''

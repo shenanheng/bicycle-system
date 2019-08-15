@@ -79,5 +79,11 @@ export default {
     post({
       params,
       url: ROOT.EDIT_USER_RIGHT
+    }),
+  // 用户授权
+  updateUserAuthorize: params =>
+    post({
+      params,
+      url: ROOT.UPDATE_USER_AUTHORIZE
     })
 };
