@@ -1,4 +1,5 @@
 import React from 'react';
+import loadable from '@loadable/component'
 import { connect } from 'react-redux';
 import {
   HashRouter as Router,
@@ -6,16 +7,17 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import Home from './view/home';
-import Login from './view/login/login';
-import CarMap from './view/carMap/carMap';
-import CityManage from './view/cityManage/cityManage';
-import HomePage from './view/homePage/homePage';
-import OrderManage from './view/orderManage/orderManage';
-import orderDetails from './view/orderManage/orderDetails';
-import RightSet from './view/rightSet/rightSet';
-import StaffManage from './view/staffManage/staffManage';
-import AddOrEditStaff from './view/staffManage/addOrEditStaff';
+const Home =  loadable(()=>import('./view/home'));
+const Login =  loadable(()=>import('./view/login/login'));
+const CarMap =  loadable(()=>import('./view/carMap/carMap'));
+const CityManage =  loadable(()=>import('./view/cityManage/cityManage'));
+const HomePage =  loadable(()=>import('./view/homePage/homePage'));
+const OrderManage =  loadable(()=>import('./view/orderManage/orderManage'));
+const orderDetails =  loadable(()=>import('./view/orderManage/orderDetails'));
+const RightSet =  loadable(()=>import('./view/rightSet/rightSet'));
+const StaffManage =  loadable(()=>import('./view/staffManage/staffManage'));
+const AddOrEditStaff =  loadable(()=>import('./view/staffManage/addOrEditStaff'));
+
 class App extends React.Component {
   state = {
     sub: {

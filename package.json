@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@loadable/component": "^5.10.2",
     "antd": "^3.18.1",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
