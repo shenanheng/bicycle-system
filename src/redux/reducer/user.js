@@ -28,13 +28,21 @@ export default (state = userState, action) => {
           ...state,
           navList: navList.concat(data)
         };
-      } else if (!navList.some(one => one.key === data.key) &&data.key!=='/home/index') {
+      } else if (
+        !navList.some(one => one.key === data.key) &&
+        data.key !== '/home/index'
+      ) {
         return {
           ...state,
           navList: navList.concat(data)
         };
       }
       return state;
+    case `${C.DEL_NAV_ITEM}`:
+      return {
+        ...state,
+        navList: navList.concat(data)
+      };
     default:
       return { ...state };
   }

@@ -12,3 +12,7 @@ export function loginIn(data) {
 export function saveNavItem(data) {
   return { type: C.SAVE_NAV_ITEM,data };
 }
+// 删除用户点击的菜单
+export function delNavItem(data) {
+  return { type: C.DEL_NAV_ITEM,data };
+}
