@@ -10,26 +10,35 @@ class HomeTop extends Component {
       fontSize: '16px'
     }
   };
-  dropClick = (type) => {
-    if(type === 'exit'){
+  dropClick = type => {
+    if (type === 'exit') {
       // 退出登录
       Utils.signOut();
     }
-  }
+  };
   render() {
     const { loginInfo } = this.props;
     const dropList = () => (
       <Menu className="drop-list">
-        <Menu.Item className="drop-list-item"
-            onClick={()=>this.dropClick('info')}
-        >基本信息</Menu.Item>
-        <Menu.Item className="drop-list-item"
-            onClick={()=>this.dropClick('password')}
-        >修改密码</Menu.Item>
+        <Menu.Item
+            className="drop-list-item"
+            onClick={() => this.dropClick('info')}
+        >
+          基本信息
+        </Menu.Item>
+        <Menu.Item
+            className="drop-list-item"
+            onClick={() => this.dropClick('password')}
+        >
+          修改密码
+        </Menu.Item>
         <hr className="line" />
-        <Menu.Item className="drop-list-item"
-            onClick={()=>this.dropClick('exit')}
-        >退出登录</Menu.Item>
+        <Menu.Item
+            className="drop-list-item"
+            onClick={() => this.dropClick('exit')}
+        >
+          退出登录
+        </Menu.Item>
       </Menu>
     );
 
@@ -50,11 +59,12 @@ class HomeTop extends Component {
           <li className="tool">
             <Dropdown overlay={dropList}>
               <div className="cursor">
-                {loginInfo.userName} <Icon type="down" />
+                {loginInfo.userName || '迷一样的自信'} <Icon type="down" />
               </div>
             </Dropdown>
           </li>
         </ul>
+
       </div>
     );
   }

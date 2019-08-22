@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import * as UserAction from '@action/user';
 class HomeMenu extends Component {
   static defaultProps = {
     list: []
@@ -9,9 +10,11 @@ class HomeMenu extends Component {
   state={
     currentMenu:'/home/index'
   }
-  handleMenu =(e) => {
+  handleMenu =({key,item}) => {
     this.setState({
-      currentMenu:e.key
+      currentMenu:key
+    },()=> {
+      this.props.addNav({key,title:item.props.title});
     })
   }
   renderSubMenu = ({ key, icon, title, children }) => {
@@ -36,7 +39,10 @@ class HomeMenu extends Component {
   };
   renderMenuItem = ({ path, icon, title }) => {
     return (
-      <Menu.Item key={path}>
+      <Menu.Item
+          key={path}
+          title={title}
+      >
         <Link to={path}>
           {icon && <Icon type={icon} />}
           <span>{title}</span>
@@ -63,4 +69,11 @@ class HomeMenu extends Component {
     );
   }
 }
-export default HomeMenu;
+function mapDispatchToProps(dispatch) {
+  return {
+    addNav(data) {
+      dispatch(UserAction.saveNavItem(data));
+    }
+  };
+}
+export default connect(null,mapDispatchToProps)(HomeMenu);

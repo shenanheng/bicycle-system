@@ -7,3 +7,8 @@ export function queryUserMenu() {
 export function loginIn(data) {
   return { type: C.LOGIN_IN,data };
 }
+
+// 存储用户点击的菜单
+export function saveNavItem(data) {
+  return { type: C.SAVE_NAV_ITEM,data };
+}

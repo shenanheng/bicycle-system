@@ -1,23 +1,40 @@
 import * as C from '../types/userTypes';
 const userState = {
   userMenuList: [], // 用户菜单列表
-  loginInfo: {} // 登录信息
+  loginInfo: {}, // 登录信息
+  navList: [] // 导航列表
 };
 
 export default (state = userState, action) => {
-  switch (action.type) {
+  const { navList } = state;
+  const { type, data } = action;
+  switch (type) {
     //用户列表的生成
     case `${C.MENU_BY_USER}_SAGA`:
       return {
         ...state,
-        userMenuList: action.data
+        userMenuList: data
       };
     // 登录信息
     case `${C.LOGIN_IN}`:
       return {
         ...state,
-        loginInfo: action.data
+        loginInfo: data
       };
+    // 存储用户点击的菜单
+    case `${C.SAVE_NAV_ITEM}`:
+      if (navList.length === 0) {
+        return {
+          ...state,
+          navList: navList.concat(data)
+        };
+      } else if (!navList.some(one => one.key === data.key) &&data.key!=='/home/index') {
+        return {
+          ...state,
+          navList: navList.concat(data)
+        };
+      }
+      return state;
     default:
       return { ...state };
   }

@@ -3,32 +3,37 @@ import React from 'react';
 // import { Route } from 'react-router-dom';
 import HomeMenu from '@business/home/HomeMenu.jsx';
 import HomeTop from '@business/home/HomeTop.jsx';
+import HomeNav from '@business/home/HomeNav.jsx';
 import '@less/home/home.less';
 import { Layout } from 'antd';
 import * as userAction from '@redux/action/user.js';
 import * as manageAction from '@redux/action/manage.js';
 import Utils from '@common/utils/misc';
-const {  Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 class Home extends React.Component {
+  state = {
+    current: '/home/index'
+  };
   componentDidMount() {
-    let { queryDic, queryMenu,queryChinaCities,queryUserInfo } = this.props;
+    let { queryDic, queryMenu, queryChinaCities, queryUserInfo } = this.props;
     queryUserInfo(Utils.decUserInfo());
     queryMenu();
     queryDic();
     queryChinaCities();
   }
   render() {
-    let { collapsed,userMenuList } = this.props;
+    let { collapsed, userMenuList, navList,current } = this.props;
     return (
       <Layout className="home">
         <Sider collapsed={collapsed}>
-          <div className="home-title">
-            {collapsed ? '' : '业务管理系统'}
-          </div>
+          <div className="home-title">{collapsed ? '' : '业务管理系统'}</div>
           <HomeMenu list={userMenuList} />
         </Sider>
         <Layout>
           <HomeTop />
+          <HomeNav current={current}
+              navList={navList}
+          />
           <Content className="home-content">{this.props.children}</Content>
         </Layout>
       </Layout>
@@ -37,12 +42,13 @@ class Home extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { rootState,userState } = state;
+  const { rootState, userState } = state;
   const { collapsed } = rootState;
-  const { userMenuList } = userState;
+  const { userMenuList, navList } = userState;
   return {
     collapsed,
-    userMenuList
+    userMenuList,
+    navList
   };
 }
 const mapDispatchToProps = dispatch => ({
