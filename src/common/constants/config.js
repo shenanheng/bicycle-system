@@ -1,3 +1,5 @@
+// mockserver的数据
+const prefix = `${window.location.protocol}//${window.location.host}/mock`;
 window.config = {
-  service: 'https://www.easy-mock.com/mock/5d4a33951086a5199a879b67/bicycle'
+  service: prefix
 };

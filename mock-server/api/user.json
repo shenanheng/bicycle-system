@@ -1,0 +1,98 @@
+{
+  "user": [
+    {
+      "url": "/user/login",
+      "desc": "登录",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "登陆成功",
+        "data": {
+          "token": "16DDED3460F74DE08E75D4D8849F116B",
+          "userName": "@cname",
+          "userId": "@integer(0, 9999)",
+          "roleName": "研发",
+          "roleId": 5
+        }
+      }
+    },
+    {
+      "url": "/user/userListByUser",
+      "desc": "根据登录用户来获取人员",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "查询成功",
+        "data|20": [
+          {
+            "status|0-1": 0,
+            "userId|+1": 1,
+            "userName": "@cname"
+          }
+        ]
+      }
+    },
+    {
+      "url": "/user/menuList",
+      "desc": "根据用户权限不同生成不同的菜单",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "msg": "OK",
+        "status": true,
+        "data": [
+          {
+            "id": 1,
+            "path": "/home/index",
+            "title": "首页",
+            "icon": "home",
+            "component": "HomePage",
+            "parentId": null
+          },
+          {
+            "id": 2,
+            "path": "/home/city",
+            "title": "城市管理",
+            "icon": "bank",
+            "component": "CityManage",
+            "parentId": null
+          },
+          {
+            "id": 3,
+            "path": "/home/order",
+            "title": "订单管理",
+            "icon": "project",
+            "component": "OrderManage",
+            "parentId": null
+          },
+          {
+            "id": 4,
+            "path": "/home/staff",
+            "title": "员工管理",
+            "icon": "user",
+            "component": "StaffManage",
+            "parentId": null
+          },
+          {
+            "id": 5,
+            "path": "/home/carMap",
+            "title": "车辆地图",
+            "icon": "environment",
+            "component": "CarMap",
+            "parentId": null
+          },
+          {
+            "id": 6,
+            "path": "/home/rightSet",
+            "title": "权限设置",
+            "icon": "setting",
+            "component": "RightSet",
+            "parentId": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "root": [
+    {
+      "url": "/root/updateUserAuthorize",
+      "desc": "更新用户授权",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "授权成功",
+        "data": "ok"
+      }
+    },
+    {
+      "url": "/root/updateUserRight",
+      "desc": "修改用户权限",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "更新成功",
+        "data": "OK"
+      }
+    },
+    {
+      "url": "/root/userRightList",
+      "desc": "用户权限列表",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "查询成功",
+        "data": {
+          "page": 1,
+          "pageSize": 15,
+          "totalCount": 89,
+          "pageCount": 6,
+          "list|15": [
+            {
+              "id|+1": 1,
+              "roleCode|0-8": 1,
+              "isEnableCode|0-1": 1,
+              "authorizeUserName": "@cname",
+              "authorizeUserId": "@integer(0, 9999)",
+              "authorizeTime": "@datetime",
+              "createTime": "@datetime",
+              "menus": [
+                "/home/index",
+                "/home/city",
+                "/home/order",
+                "/home/staff",
+                "/home/carMap",
+                "/home/rightSet"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "/root/bikeList",
+      "desc": "自行车数量以及区域查询",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "查询成功",
+        "data": {
+          "totalCount": 100,
+          "bikeList": [
+            "116.356619,40.017782",
+            "116.437107,39.975331",
+            "116.34972,40.070808",
+            "116.323849,39.964714",
+            "116.404912,40.015129",
+            "116.365243,39.958078"
+          ],
+          "routeList": [
+            "116.353101,40.067835",
+            "116.357701,40.053699",
+            "116.374086,40.027626",
+            "116.397801,40.01641"
+          ],
+          "serviceList": [
+            {
+              "lon": "116.274737",
+              "lat": "40.139759",
+              "ts": null
+            },
+            {
+              "lon": "116.316562",
+              "lat": "40.144943",
+              "ts": null
+            },
+            {
+              "lon": "116.351631",
+              "lat": "40.129498",
+              "ts": null
+            },
+            {
+              "lon": "116.390582",
+              "lat": "40.082481",
+              "ts": null
+            },
+            {
+              "lon": "116.38742",
+              "lat": "40.01065",
+              "ts": null
+            },
+            {
+              "lon": "116.414297",
+              "lat": "40.01181",
+              "ts": null
+            },
+            {
+              "lon": "116.696242",
+              "lat": "39.964035",
+              "ts": null
+            },
+            {
+              "lon": "116.494498",
+              "lat": "39.851306",
+              "ts": null
+            },
+            {
+              "lon": "116.238086",
+              "lat": "39.848647",
+              "ts": null
+            },
+            {
+              "lon": "116.189454",
+              "lat": "39.999418",
+              "ts": null
+            },
+            {
+              "lon": "116.244646",
+              "lat": "39.990574",
+              "ts": null
+            },
+            {
+              "lon": "116.281441",
+              "lat": "40.008703",
+              "ts": null
+            },
+            {
+              "lon": "116.271092",
+              "lat": "40.142201",
+              "ts": null
+            },
+            {
+              "lon": "116.271092",
+              "lat": "40.142201",
+              "ts": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "/root/seeStaff",
+      "desc": "查看单个员工列表的详情",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "查询成功",
+        "data": {
+          "staffId|+1": 1,
+          "userName": "@cname",
+          "userId": "@integer(0, 9999)",
+          "age": "@integer(20,80)",
+          "sexCode|0-1": 0,
+          "peopleStatus|0-4": 2,
+          "hobby": "@cword(2,5)",
+          "marriageStatus|0-4": 3,
+          "birthday": "@datetime",
+          "address": "@cword(5,10)",
+          "morningTime": "0@integer(7,8):2@integer(0,9):00"
+        }
+      }
+    },
+    {
+      "url": "/root/updateStaff",
+      "desc": "编辑员工",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "更新员工资料成功",
+        "data": "OK"
+      }
+    },
+    {
+      "url": "/root/addStaff",
+      "desc": "新增员工",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "新增员工成功",
+        "data": "OK"
+      }
+    },
+    {
+      "url": "/root/delStaff",
+      "desc": "删除员工",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "删除成功",
+        "data": "OK"
+      }
+    },
+    {
+      "url": "/root/staffManageList",
+      "desc": "获取员工管理列表",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "查询成功",
+        "data": {
+          "page": 1,
+          "pageSize": 15,
+          "totalCount": 89,
+          "pageCount": 6,
+          "list|15": [
+            {
+              "staffId|+1": 1,
+              "userName": "@cname",
+              "userId": "@integer(0, 9999)",
+              "age": "@integer(20,80)",
+              "sexCode|0-1": 0,
+              "peopleStatus|0-4": 2,
+              "hobby": "@cword(2,5)",
+              "marriageStatus|0-4": 3,
+              "birthday": "@datetime",
+              "address": "@cword(5,10)",
+              "morningTime": "0@integer(7,8):2@integer(0,9):00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "/root/finishOrder",
+      "desc": "结束订单详情",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "订单结束成功",
+        "data": "OK"
+      }
+    },
+    {
+      "url": "/root/getEndBikeInfo",
+      "desc": "获取结束订单的详情",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "OK",
+        "data": {
+          "id|+1": "T@integer(10000,99999)",
+          "carNum": "@integer(10000,99999)",
+          "battery": "@integer(0,100)",
+          "location": "@cword(5,10)",
+          "startTime": "@datetime"
+        }
+      }
+    },
+    {
+      "url": "/root/getOrderDetails",
+      "desc": "获取单个订单详情",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "OK",
+        "data": {
+          "basic": {
+            "id": "T@integer(10000,99999)",
+            "carNum": "T@integer(10000,99999)",
+            "userName": "@cname",
+            "carModeCode|0-1": 1,
+            "phone": 18980521212
+          },
+          "trajectory": {
+            "startLocation": "@cword(5,10)",
+            "endLocation": "@cword(5,10)",
+            "distance": "@integer(1,100000)"
+          },
+          "userRoute": [
+            {
+              "lon": 116.361221,
+              "lat": 40.043776
+            },
+            {
+              "lon": 116.363736,
+              "lat": 40.038086
+            },
+            {
+              "lon": 116.364599,
+              "lat": 40.036484
+            },
+            {
+              "lon": 116.373438,
+              "lat": 40.03538
+            },
+            {
+              "lon": 116.377966,
+              "lat": 40.036263
+            },
+            {
+              "lon": 116.379762,
+              "lat": 40.03654
+            },
+            {
+              "lon": 116.38084,
+              "lat": 40.033225
+            },
+            {
+              "lon": 116.38084,
+              "lat": 40.029413
+            },
+            {
+              "lon": 116.381343,
+              "lat": 40.021291
+            },
+            {
+              "lon": 116.381846,
+              "lat": 40.015821
+            },
+            {
+              "lon": 116.382637,
+              "lat": 40.008084
+            },
+            {
+              "lon": 116.398806,
+              "lat": 40.008637
+            }
+          ],
+          "serviceArea": [
+            {
+              "lon": "116.274737",
+              "lat": "40.139759",
+              "ts": null
+            },
+            {
+              "lon": "116.316562",
+              "lat": "40.144943",
+              "ts": null
+            },
+            {
+              "lon": "116.351631",
+              "lat": "40.129498",
+              "ts": null
+            },
+            {
+              "lon": "116.390582",
+              "lat": "40.082481",
+              "ts": null
+            },
+            {
+              "lon": "116.38742",
+              "lat": "40.01065",
+              "ts": null
+            },
+            {
+              "lon": "116.414297",
+              "lat": "40.01181",
+              "ts": null
+            },
+            {
+              "lon": "116.696242",
+              "lat": "39.964035",
+              "ts": null
+            },
+            {
+              "lon": "116.494498",
+              "lat": "39.851306",
+              "ts": null
+            },
+            {
+              "lon": "116.238086",
+              "lat": "39.848647",
+              "ts": null
+            },
+            {
+              "lon": "116.189454",
+              "lat": "39.999418",
+              "ts": null
+            },
+            {
+              "lon": "116.244646",
+              "lat": "39.990574",
+              "ts": null
+            },
+            {
+              "lon": "116.281441",
+              "lat": "40.008703",
+              "ts": null
+            },
+            {
+              "lon": "116.271092",
+              "lat": "40.142201",
+              "ts": null
+            },
+            {
+              "lon": "116.271092",
+              "lat": "40.142201",
+              "ts": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "/root/orderManageList",
+      "desc": "获取订单管理列表",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "OK",
+        "data": {
+          "page": 1,
+          "pageSize": 15,
+          "totalCount": 89,
+          "pageCount": 6,
+          "list|15": [
+            {
+              "id|+1": "T@integer(10000,99999)",
+              "carNum": "@integer(10000,99999)",
+              "userName": "@cname",
+              "phone": 18980521111,
+              "distance": "@integer(1,100000)",
+              "totalTime": "@integer(24,1000)",
+              "orderStatusCode|0-2": 1,
+              "startTime": "@datetime",
+              "endTime": "@datetime",
+              "advancePay": "@integer(1000,10000)",
+              "actualPay": "@integer(1000,10000)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "url": "/root/cityManageList",
+      "desc": "城市管理的列表",
+      "mock": true,
+      "res": {
+        "code": 200,
+        "status": true,
+        "msg": "OK",
+        "data": {
+          "page": 1,
+          "pageSize": 15,
+          "totalCount": 89,
+          "pageCount": 6,
+          "list|15": [
+            {
+              "id|+1": 1,
+              "name": "@city",
+              "carModeCode|0-1": 1,
+              "operateCode|0-1": 1,
+              "franchiseeId|+1": 100,
+              "franchiseeName": "@cword(2,5)",
+              "cityAdmins|1-2": [
+                {
+                  "userName": "@cname",
+                  "userId|+1": 10001
+                }
+              ],
+              "openTime": "@datetime",
+              "sysUserName": "@cname",
+              "updateTime": 1520476737000
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

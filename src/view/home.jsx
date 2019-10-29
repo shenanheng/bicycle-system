@@ -22,7 +22,7 @@ class Home extends React.Component {
     queryChinaCities();
   }
   render() {
-    let { collapsed, userMenuList, navList,current } = this.props;
+    let { collapsed, userMenuList, navList, current } = this.props;
     return (
       <Layout className="home">
         <Sider collapsed={collapsed}>

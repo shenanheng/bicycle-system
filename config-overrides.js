@@ -46,7 +46,7 @@ module.exports = override(
   }),
   // 添加less 和 配置主题
   addLessLoader({
-    javascriptEnabled: true,
+    javascriptEnabled: true
   }),
 
   // 关闭mapSource

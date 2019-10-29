@@ -2,6 +2,18 @@
 const crypto = require('crypto');
 
 const utils = {
+  // 打开loading
+  openLoading(name = '加载中，请稍后...') {
+    let loading = document.getElementById('ajaxLoading');
+    let text = document.getElementById('loadingText');
+    text.innerHtml = name;
+    loading.style.display = 'block';
+  },
+  // 关闭loading
+  closeLoading() {
+    let loading = document.getElementById('ajaxLoading');
+    loading.style.display = 'none';
+  },
   // base64转file
   dataURLtoFile(dataurl, filename) {
     const arr = dataurl.split(',');
@@ -147,11 +159,11 @@ const utils = {
    * @param secret string 要使用的加密密钥(要记住,不然就解不了密啦)
    * @retrun string 加密后的字符串
    * */
-  encAse192(str, secret) {
-    const cipher = crypto.createCipher('aes192', secret); // 设置加密类型 和 要使用的加密密钥
-    let enc = cipher.update(str, 'utf8', 'hex'); // 编码方式从utf-8转为hex;
-    enc += cipher.final('hex'); // 编码方式从转为hex;
-    return enc; // 返回加密后的字符串
+  encAse192: function(str, secret) {
+    var cipher = crypto.createCipher('aes192', secret); //设置加密类型 和 要使用的加密密钥
+    var enc = cipher.update(str, 'utf8', 'hex'); //编码方式从utf-8转为hex;
+    enc += cipher.final('hex'); //编码方式从转为hex;
+    return enc; //返回加密后的字符串
   },
   /**
    * @aes192解密模块
